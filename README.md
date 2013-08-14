@@ -2,6 +2,10 @@
  
 Access the [Ubivox API][1] from PHP.
 
+## Requirements
+
+The cURL module is required.
+
 ## Bugs
 
 Report any bugs to the [bug tracker][2].

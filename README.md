@@ -1,6 +1,6 @@
 # Ubivox PHP API library
  
-Access the ![Ubivox API][1] from PHP.
+Access the [Ubivox API][1] from PHP.
 
 ## License
 

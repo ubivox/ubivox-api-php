@@ -2,7 +2,7 @@
 
 define("UBIVOX_API_CLIENT_VERSION", "0.1");
 
-require_once("IXR_library.php");
+require_once dirname(__FILE__)."/IXR_Library.php";
 
 class UbivoxAPIException extends Exception { }
 class UbivoxAPIUnavailable extends UbivoxAPIException { }
@@ -28,7 +28,7 @@ class UbivoxAPI {
 
         $c = curl_init($this->url);
 
-        curl_setopt($c, CURLOPT_USERAGENT, "Ubivox API PHP client ". UBIVOX_API_CLIENT_VERSION)
+        curl_setopt($c, CURLOPT_USERAGENT, "Ubivox API PHP client ".UBIVOX_API_CLIENT_VERSION);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -48,7 +48,7 @@ class UbivoxAPI {
 
             # Support for 100 Continue HTTP header
 
-            if (strpos($data, "HTTP/1.1") == 0) {
+            if (strpos($data, "HTTP/1.1") === 0) {
                 list($header, $data) = explode("\r\n\r\n", $data, 2);
             }
 

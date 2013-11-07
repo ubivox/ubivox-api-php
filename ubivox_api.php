@@ -13,17 +13,18 @@ class UbivoxAPINotFound extends UbivoxAPIException { }
 
 class UbivoxAPI {
 
-    function __construct($username, $password, $url) {
+    function __construct($username, $password, $url, $encoding="utf-8") {
         $this->username = $username;
         $this->password = $password;
         $this->url = $url;
+        $this->encoding = $encoding;
     }
 
     public function call($method, $params = null) {
 
         $auth = $this->username.":".$this->password;
 
-        $request = new IXR_Request($method, $params);
+        $request = new IXR_Request($method, $params, $this->encoding);
         $post = $request->xml;
 
         $c = curl_init($this->url);
@@ -37,6 +38,7 @@ class UbivoxAPI {
         curl_setopt($c, CURLOPT_POSTFIELDS, $post);
         curl_setopt($c, CURLOPT_HEADER, true);
         curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($c, CURLOPT_HTTPHEADER, array("Content-Type: text/xml; charset=".$this->encoding));
 
         $http_response = curl_exec($c);
 

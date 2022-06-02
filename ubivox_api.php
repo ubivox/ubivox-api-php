@@ -47,6 +47,26 @@ class UbivoxAPI {
 
         $info = curl_getinfo($c);
 
+        if ($info["http_code"] == 401) {
+            throw new UbivoxAPIUnauthorized();
+        }
+
+        if ($info["http_code"] == 500) {
+            throw new UbivoxAPIException();
+        }
+
+        if ($info["http_code"] == 503) {
+            throw new UbivoxAPIUnavailable();
+        }
+
+        if ($info["http_code"] == 404) {
+            throw new UbivoxAPINotFound();
+        }
+
+        if ($info["http_code"] == 0) {
+            throw new UbivoxAPIConnectionError();
+        }
+
         list($header, $data) = explode("\r\n\r\n", $http_response, 2);
 
         if ($info["http_code"] == 200) {
@@ -66,22 +86,6 @@ class UbivoxAPI {
 
             return $message->params[0];
 
-        }
-
-        if ($info["http_code"] == 401) {
-            throw new UbivoxAPIUnauthorized();
-        }
-
-        if ($info["http_code"] == 503) {
-            throw new UbivoxAPIUnavailable();
-        }
-
-        if ($info["http_code"] == 404) {
-            throw new UbivoxAPINotFound();
-        }
-
-        if ($info["http_code"] == 0) {
-            throw new UbivoxAPIConnectionError();
         }
 
         throw new UbivoxAPIException($header);

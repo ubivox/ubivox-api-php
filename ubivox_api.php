@@ -37,7 +37,7 @@ class UbivoxAPI {
         curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($c, CURLOPT_POSTFIELDS, $post);
         curl_setopt($c, CURLOPT_HEADER, true);
-        curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 15);
         curl_setopt($c, CURLOPT_HTTPHEADER, array(
             "Content-Type: text/xml; charset=".$this->encoding,
             "Expect:"

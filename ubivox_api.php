@@ -13,6 +13,11 @@ class UbivoxAPINotFound extends UbivoxAPIException { }
 
 class UbivoxAPI {
 
+    private $username;
+    private $password;
+    private $url;
+    private $encoding;
+    
     function __construct($username, $password, $url, $encoding="utf-8") {
         $this->username = $username;
         $this->password = $password;

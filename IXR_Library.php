@@ -237,7 +237,7 @@ class IXR_Message
     function tag_open($parser, $tag, $attr)
     {
         $this->_currentTagContents = '';
-        $this->currentTag = $tag;
+        $this->_currentTag = $tag;
         switch($tag) {
             case 'methodCall':
             case 'methodResponse':
@@ -549,6 +549,7 @@ class IXR_Request
     var $method;
     var $args;
     var $xml;
+    var $encoding;
 
     function __construct($method, $args, $encoding="utf-8")
     {

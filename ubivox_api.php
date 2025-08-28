@@ -17,7 +17,7 @@ class UbivoxAPI {
     var $password;
     var $url;
     var $encoding;
-    
+
     function __construct($username, $password, $url, $encoding="utf-8") {
         $this->username = $username;
         $this->password = $password;
@@ -42,7 +42,7 @@ class UbivoxAPI {
         curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($c, CURLOPT_POSTFIELDS, $post);
         curl_setopt($c, CURLOPT_HEADER, true);
-        curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 15);
+        curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($c, CURLOPT_HTTPHEADER, array(
             "Content-Type: text/xml; charset=".$this->encoding,
             "Expect:"

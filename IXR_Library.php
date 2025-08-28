@@ -115,7 +115,7 @@ class IXR_Value
                 return '<double>'.$this->data.'</double>';
                 break;
             case 'string':
-                return '<string>'.htmlspecialchars($this->data).'</string>';
+                return '<string>'.htmlspecialchars(($this->data ? $this->data : '')).'</string>';
                 break;
             case 'array':
                 $return = '<array><data>'."\n";
@@ -600,6 +600,7 @@ class IXR_Client
     var $message = false;
     var $debug = false;
     var $timeout;
+    var $headers = [];
 
     // Storage place for an error message
     var $error = false;
@@ -1293,6 +1294,7 @@ class IXR_ClassServer extends IXR_Server
 {
     var $_objects;
     var $_delim;
+    var $_delimiter;
 
     function __construct($delim = '.', $wait = false)
     {
